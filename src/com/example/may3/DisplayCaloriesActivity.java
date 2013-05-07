@@ -18,6 +18,9 @@ public class DisplayCaloriesActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
+		dbHelper = new CaloriesDbAdapter(this);
+		dbHelper.open();
+		
 		Intent intent = getIntent();
 		int message = Integer.parseInt(intent.getStringExtra(MainActivity.EXTRA_MESSAGE));
 
@@ -25,14 +28,13 @@ public class DisplayCaloriesActivity extends Activity {
 		dbHelper.addCalories(message); 
 		
 		//get all calories and compute the total sum
-		Cursor c = dbHelper.fetchAllNotes();
-		startManagingCursor(c);
-		String[] from = new String[] { CaloriesDbAdapter.KEY_CALORIES};
+		Cursor c = dbHelper.fetchAllCalories();
 		int sum = 0;
-		for (String s : from) {
-			sum += Integer.parseInt(s); 
-		}		
 		
+		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+			sum += c.getInt(1);
+		}
+
 		TextView textView = new TextView(this);
 		textView.setTextSize(40);
 		textView.setText("Today: " + String.valueOf(sum));

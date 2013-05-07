@@ -67,8 +67,11 @@ public class CaloriesDbAdapter extends Activity {
 		return db.insert(DATABASE_TABLE, null, values);
 	}
 	
-	public Cursor fetchAllNotes() {
+	public Cursor fetchAllCalories() {
 		return db.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_CALORIES}, null, null, null, null, null);
 	}
 
+	public void deleteCaloriesTable() {
+		db.execSQL("delete from calories");
+	}
 }
