@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,11 +36,15 @@ public class DisplayCaloriesActivity extends Activity {
 			sum += c.getInt(1);
 		}
 
-		TextView textView = new TextView(this);
-		textView.setTextSize(40);
-		textView.setText("Today: " + String.valueOf(sum));
+		TextView textView1 = (TextView) findViewById(R.id.calories_management);
+		textView1.setTextSize(22);
+		textView1.setTextColor(Color.BLUE);
+		textView1.setText("Calories management");
 		
-		setContentView(textView);
+		TextView textView = (TextView) findViewById(R.id.total_calories);
+		textView.setTextSize(18);
+		textView.setText("Today: " + String.valueOf(sum));
+
 	}
 	
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
