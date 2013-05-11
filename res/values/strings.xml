@@ -8,5 +8,12 @@
     <string name="title_activity_display_calories">DisplayCaloriesActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_calories_db_adapter">CaloriesDbAdapter</string>
-
+    <string name="daily_need">Set daily caloric need</string>
+    <string name="title_activity_set_daily_caloric_need">SetDailyCaloricNeedActivity</string>
+	<string name="insert_data">Please insert your data:</string>
+	<string name="insert_weight">Weight (kg)</string>
+	<string name="insert_height">Height (cm)</string>
+	<string name="insert_age">Age</string>
+	<string name="save">Save</string>
+    
 </resources>

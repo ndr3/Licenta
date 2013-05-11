@@ -7,14 +7,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:layout_marginTop="10dp"
     tools:context=".DisplayCaloriesActivity" >
     
-    <TextView android:id="@+id/calories_management"
+    <TextView android:id="@+id/calories_management_textview"
         android:textIsSelectable="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
     
-    <TextView android:id="@+id/total_calories"
+    <TextView android:id="@+id/total_calories_textview"
         android:textIsSelectable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

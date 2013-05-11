@@ -36,15 +36,16 @@ public class DisplayCaloriesActivity extends Activity {
 			sum += c.getInt(1);
 		}
 
-		TextView textView1 = (TextView) findViewById(R.id.calories_management);
+		TextView textView1 = (TextView) findViewById(R.id.calories_management_textview);
 		textView1.setTextSize(22);
-		textView1.setTextColor(Color.BLUE);
+		textView1.setTextColor(Color.rgb(45, 100, 180));
 		textView1.setText("Calories management");
 		
-		TextView textView = (TextView) findViewById(R.id.total_calories);
+		TextView textView = (TextView) findViewById(R.id.total_calories_textview);
 		textView.setTextSize(18);
 		textView.setText("Today: " + String.valueOf(sum));
 
+		
 	}
 	
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)

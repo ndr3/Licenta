@@ -25,9 +25,14 @@ public class MainActivity extends Activity {
 	
 	public void addCalories(View view) {
 		Intent intent = new Intent(this, DisplayCaloriesActivity.class);
-		EditText editText = (EditText) findViewById(R.id.add_message);
+		EditText editText = (EditText) findViewById(R.id.add_message_edittext);
 		String message = editText.getText().toString();
 		intent.putExtra(EXTRA_MESSAGE, message);
+		startActivity(intent);
+	}
+	
+	public void setDailyCaloricNeed(View view) {
+		Intent intent = new Intent(this, SetDailyCaloricNeedActivity.class);
 		startActivity(intent);
 	}
 }

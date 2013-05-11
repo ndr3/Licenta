@@ -30,6 +30,10 @@
             android:name="com.example.may3.CaloriesDbAdapter"
             android:label="@string/title_activity_calories_db_adapter" >
         </activity>
+        <activity
+            android:name="com.example.may3.SetDailyCaloricNeedActivity"
+            android:label="@string/title_activity_set_daily_caloric_need" >
+        </activity>
     </application>
 
 </manifest>
