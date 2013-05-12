@@ -91,7 +91,7 @@ public class CaloriesDbAdapter extends Activity {
 		return db.query(DATABASE_CALORIES_TABLE, new String[] {KEY_ROWID, KEY_CALORIES}, null, null, null, null, null);
 	}
 	
-	public long setCaloricNeed(int caloricNeed) {
+	public long setCaloricNeeds(int caloricNeed) {
 		String strFilter = "_id=1";
 		ContentValues values = new ContentValues();
 		values.put(KEY_CALORIC_NEED, caloricNeed);

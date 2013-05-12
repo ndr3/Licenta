@@ -18,5 +18,11 @@
     <string name="female">Female</string>
     <string name="male">Male</string>
 	<string name="select_gender">Gender</string>
-    
+    <string name="activity">Activity</string>
+    <string name="sedentary">Sedentary</string>
+    <string name="lightly_active">Lightly active</string>
+    <string name="moderately_active">Moderately active</string>
+    <string name="very_active">Very active</string>
+    <string name="extra_active">Extra active</string>
+	
 </resources>
