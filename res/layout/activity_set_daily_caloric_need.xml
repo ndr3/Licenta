@@ -6,8 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".SetDailyCaloricNeedActivity" 
-    android:orientation="vertical" >"
+    android:orientation="vertical"
+    tools:context=".SetDailyCaloricNeedActivity"> 
 
     <TextView android:id="@+id/total_calories_textview"
         android:textIsSelectable="true"
