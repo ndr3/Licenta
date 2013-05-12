@@ -1,13 +1,16 @@
 package com.example.may3;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
 public class SetDailyCaloricNeedActivity extends Activity {
+	public final static String EXTRA_MESSAGE = "com.example.may3.CALORIC_NEEDS";
+	
 	private CaloriesDbAdapter dbHelper;
 
 	@Override
@@ -26,7 +29,7 @@ public class SetDailyCaloricNeedActivity extends Activity {
 		return true;
 	}
 	
-	public void saveUserData(View view) {
+	public void computeDailyCaloricNeeds(View view) {
 		EditText editText = (EditText) findViewById(R.id.insert_weight_edittext);
 		int weight = Integer.parseInt(editText.getText().toString());
 		
@@ -76,5 +79,9 @@ public class SetDailyCaloricNeedActivity extends Activity {
 		}
 		
 		dbHelper.setCaloricNeeds(caloricNeeds);
+		
+		Intent intent = new Intent(this, DisplayCaloricNeedsActivity.class);
+		intent.putExtra(EXTRA_MESSAGE, String.valueOf(caloricNeeds));
+		startActivity(intent);
 	}
 }

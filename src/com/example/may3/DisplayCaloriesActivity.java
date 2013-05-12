@@ -43,9 +43,7 @@ public class DisplayCaloriesActivity extends Activity {
 		
 		TextView textView = (TextView) findViewById(R.id.total_calories_textview);
 		textView.setTextSize(18);
-		textView.setText("Today: " + String.valueOf(sum));
-
-		
+		textView.setText("Today: " + String.valueOf(sum));	
 	}
 	
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)

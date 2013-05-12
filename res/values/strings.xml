@@ -10,19 +10,20 @@
     <string name="title_activity_calories_db_adapter">CaloriesDbAdapter</string>
     <string name="daily_need">Set daily caloric needs</string>
     <string name="title_activity_set_daily_caloric_need">SetDailyCaloricNeedActivity</string>
-	<string name="insert_data">Please insert your data:</string>
-	<string name="insert_weight">Weight (kg)</string>
-	<string name="insert_height">Height (cm)</string>
-	<string name="insert_age">Age</string>
-	<string name="save">Save</string>
+    <string name="insert_data">Please insert your data:</string>
+    <string name="insert_weight">Weight (kg)</string>
+    <string name="insert_height">Height (cm)</string>
+    <string name="insert_age">Age</string>
+    <string name="save">Save</string>
     <string name="female">Female</string>
     <string name="male">Male</string>
-	<string name="select_gender">Gender</string>
+    <string name="select_gender">Gender</string>
     <string name="activity">Activity</string>
     <string name="sedentary">Sedentary</string>
     <string name="lightly_active">Lightly active</string>
     <string name="moderately_active">Moderately active</string>
     <string name="very_active">Very active</string>
     <string name="extra_active">Extra active</string>
-	
+    <string name="title_activity_display_caloric_needs">DisplayCaloricNeedsActivity</string>
+    
 </resources>
