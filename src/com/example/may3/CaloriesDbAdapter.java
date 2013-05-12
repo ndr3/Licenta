@@ -21,7 +21,7 @@ public class CaloriesDbAdapter extends Activity {
 	private static final String CREATE_CALORIES_TABLE = "CREATE TABLE IF NOT EXISTS calories (_id integer primary key autoincrement, calories_no integer not null )";
 	private static final String CREATE_USERS_TABLE = "CREATE TABLE IF NOT EXISTS users (_id integer primary key autoincrement,  caloric_need integer)";
 	
-	private static final String DATABASE_NAME = "data2";
+	private static final String DATABASE_NAME = "data";
 	private static final String DATABASE_CALORIES_TABLE = "calories";
 	private static final String DATABASE_USERS_TABLE = "users";
 	private static final int DATABASE_VERSION = 2;
@@ -66,6 +66,7 @@ public class CaloriesDbAdapter extends Activity {
 	}
 	
 	public CaloriesDbAdapter(Context ctx) {
+		ctx.deleteDatabase("data3");
 		this.ctx = ctx;
 	}
 	
@@ -91,10 +92,22 @@ public class CaloriesDbAdapter extends Activity {
 	}
 	
 	public long setCaloricNeed(int caloricNeed) {
+		String strFilter = "_id=1";
 		ContentValues values = new ContentValues();
 		values.put(KEY_CALORIC_NEED, caloricNeed);
 		
-		return db.insert(DATABASE_USERS_TABLE, null, values);
+		Cursor c = db.rawQuery("SELECT COUNT(*) FROM users", null);
+		if (c != null) {
+			c.moveToFirst();
+			if (c.getInt(0) == 0) {
+				//table is empty -> insert values
+				return db.insert(DATABASE_USERS_TABLE, null, values);
+			} else { //update values
+				return db.update(DATABASE_USERS_TABLE, values, strFilter, null);
+			}			
+		}
+		
+		return 0;
 	}
 
 	public Cursor caloricNeed() {

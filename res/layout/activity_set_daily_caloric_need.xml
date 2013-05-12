@@ -33,9 +33,36 @@
     	android:layout_height="wrap_content"
     	android:hint="@string/insert_age" />
    	
+   	<RadioGroup android:layout_width="fill_parent"
+   	       	    android:layout_height="wrap_content"
+   	       	    android:orientation="horizontal"
+   	       	    android:layout_marginTop="16dp">
+   	       	    
+   	    <TextView android:id="@+id/gender_textview"
+   	        android:textIsSelectable="true" 
+   	        android:layout_width="wrap_content"
+   	        android:layout_height="wrap_content"
+   	        android:text="@string/select_gender" />
+   	    
+   	    <RadioButton android:id="@+id/radio_female"
+   	        android:textIsSelectable="true"
+   	        android:layout_width="wrap_content"
+   	        android:layout_height="wrap_content"
+   	        android:text="@string/female" />
+   	    
+   	     <RadioButton android:id="@+id/radio_male"
+   	        android:textIsSelectable="true"
+   	        android:layout_width="wrap_content"
+   	        android:layout_height="wrap_content"
+   	        android:text="@string/male" />   	 
+   	           "
+   	</RadioGroup>
+	
   	<Button android:layout_width="wrap_content"
    		android:layout_height="wrap_content"
    		android:text="@string/save"
-   		android:onClick="saveUserData"/>
+   		android:onClick="saveUserData"
+   		android:layout_marginTop="150dp"
+   		android:layout_gravity="center"/>
 
 </LinearLayout>
