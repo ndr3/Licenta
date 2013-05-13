@@ -29,7 +29,7 @@ public class DisplayCaloriesActivity extends Activity {
 		dbHelper.addCalories(message); 
 		
 		//get all calories and compute the total sum
-		Cursor c = dbHelper.fetchAllCalories();
+		Cursor c = dbHelper.fetchTodayCalories();
 		int sum = 0;
 		
 		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {

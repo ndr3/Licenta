@@ -1,5 +1,9 @@
 package com.example.may3;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,16 +13,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+@SuppressLint("SimpleDateFormat")
 public class CaloriesDbAdapter extends Activity {
 	public static final String KEY_ROWID = "_id";
 	public static final String KEY_CALORIES = "calories_no";
 	public static final String KEY_CALORIC_NEED = "caloric_need";
+	public static final String KEY_EATEN_DATE = "eaten_date";
 	
 	private static final String TAG = "CaloriesDbAdapter";
 	private DatabaseHelper dbHelper;
 	private SQLiteDatabase db;
 
-	private static final String CREATE_CALORIES_TABLE = "CREATE TABLE IF NOT EXISTS calories (_id integer primary key autoincrement, calories_no integer not null )";
+	private static final String CREATE_CALORIES_TABLE = "CREATE TABLE IF NOT EXISTS calories (_id integer primary key autoincrement, calories_no integer not null, eaten_date date )";
 	private static final String CREATE_USERS_TABLE = "CREATE TABLE IF NOT EXISTS users (_id integer primary key autoincrement,  caloric_need integer)";
 	
 	private static final String DATABASE_NAME = "data";
@@ -66,7 +72,6 @@ public class CaloriesDbAdapter extends Activity {
 	}
 	
 	public CaloriesDbAdapter(Context ctx) {
-		ctx.deleteDatabase("data3");
 		this.ctx = ctx;
 	}
 	
@@ -81,10 +86,25 @@ public class CaloriesDbAdapter extends Activity {
 	}
 	
 	public long addCalories(int calories) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Date date = new Date();
+
 		ContentValues values = new ContentValues();
+		values.put(KEY_EATEN_DATE, dateFormat.format(date));
 		values.put(KEY_CALORIES, calories);
 		
 		return db.insert(DATABASE_CALORIES_TABLE, null, values);
+	}
+	
+	public Cursor fetchTodayCalories() {
+		String[] whereClause = new String[1];
+		whereClause[0] = "eaten_date = ?";
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Date date = new Date();
+		String whereArgs = dateFormat.format(date);
+		
+		return db.query(DATABASE_CALORIES_TABLE, new String[] {KEY_ROWID, KEY_CALORIES}, null, whereClause, whereArgs, null, null);
 	}
 	
 	public Cursor fetchAllCalories() {
