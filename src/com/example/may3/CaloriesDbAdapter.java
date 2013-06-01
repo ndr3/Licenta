@@ -1,8 +1,7 @@
 package com.example.may3;
 
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -24,10 +23,10 @@ public class CaloriesDbAdapter extends Activity {
 	private DatabaseHelper dbHelper;
 	private SQLiteDatabase db;
 
-	private static final String CREATE_CALORIES_TABLE = "CREATE TABLE IF NOT EXISTS calories (_id integer primary key autoincrement, calories_no integer not null, eaten_date date )";
+	private static final String CREATE_CALORIES_TABLE = "CREATE TABLE IF NOT EXISTS calories (_id integer primary key autoincrement, calories_no integer not null, eaten_date long )";
 	private static final String CREATE_USERS_TABLE = "CREATE TABLE IF NOT EXISTS users (_id integer primary key autoincrement,  caloric_need integer)";
 	
-	private static final String DATABASE_NAME = "data";
+	private static final String DATABASE_NAME = "data4";
 	private static final String DATABASE_CALORIES_TABLE = "calories";
 	private static final String DATABASE_USERS_TABLE = "users";
 	private static final int DATABASE_VERSION = 2;
@@ -86,25 +85,31 @@ public class CaloriesDbAdapter extends Activity {
 	}
 	
 	public long addCalories(int calories) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		Date date = new Date();
-
 		ContentValues values = new ContentValues();
-		values.put(KEY_EATEN_DATE, dateFormat.format(date));
+		Calendar rightNow = Calendar.getInstance();
+		long timestamp = rightNow.getTimeInMillis();
+		values.put(KEY_EATEN_DATE, timestamp);
 		values.put(KEY_CALORIES, calories);
 		
 		return db.insert(DATABASE_CALORIES_TABLE, null, values);
 	}
 	
-	public Cursor fetchTodayCalories() {
-		String[] whereClause = new String[1];
-		whereClause[0] = "eaten_date = ?";
+	@SuppressWarnings("deprecation")
+	public Cursor fetchTodayCalories() {	
+		//compute the miliseconds that passed since yesterday
+		Date d = new Date();
+		int hours = d.getHours() + 3;
+		int minutes = d.getMinutes();
+		int seconds = d.getSeconds();
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		Date date = new Date();
-		String whereArgs = dateFormat.format(date);
+		long todayPassedMilisecs = hours*60*60*1000 + minutes*60*1000 + seconds*1000;
 		
-		return db.query(DATABASE_CALORIES_TABLE, new String[] {KEY_ROWID, KEY_CALORIES}, null, whereClause, whereArgs, null, null);
+		Calendar rightNow = Calendar.getInstance();
+		long timestamp = rightNow.getTimeInMillis();
+		long yesterday = timestamp - todayPassedMilisecs; 		
+		
+		//select only calories eaten today
+		return db.rawQuery("SELECT * FROM calories WHERE eaten_date > ?", new String[] {String.valueOf(yesterday)});
 	}
 	
 	public Cursor fetchAllCalories() {
