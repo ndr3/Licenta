@@ -30,20 +30,32 @@ public class DisplayCaloriesActivity extends Activity {
 		
 		//get all calories and compute the total sum
 		Cursor c = dbHelper.fetchTodayCalories();
-		int sum = 0;
+		int consumedCalories = 0;
 		
 		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-			sum += c.getInt(1);
+			consumedCalories += c.getInt(1);
 		}
 
-		TextView textView1 = (TextView) findViewById(R.id.calories_management_textview);
-		textView1.setTextSize(22);
-		textView1.setTextColor(Color.rgb(45, 100, 180));
-		textView1.setText("Calories management");
+		TextView titleTextView = (TextView) findViewById(R.id.calories_management_textview);
+		titleTextView.setTextSize(22);
+		titleTextView.setTextColor(Color.rgb(45, 100, 180));
+		titleTextView.setText("Calories management");
 		
-		TextView textView = (TextView) findViewById(R.id.total_calories_textview);
-		textView.setTextSize(18);
-		textView.setText("Today: " + String.valueOf(sum));	
+		TextView totalCaloriesTextView = (TextView) findViewById(R.id.total_calories_textview);
+		totalCaloriesTextView.setTextSize(18);
+		totalCaloriesTextView.setText("Consumed calories today: " + String.valueOf(consumedCalories));	
+		
+		Cursor dailyCaloricNeedsCursor = dbHelper.caloricNeed();
+		dailyCaloricNeedsCursor.moveToFirst();
+		int caloricNeeds = dailyCaloricNeedsCursor.getInt(0);
+		
+		TextView remainingCaloriesTextView = (TextView) findViewById(R.id.remaining_calories_textview);
+		remainingCaloriesTextView.setTextSize(18);
+		remainingCaloriesTextView.setText("Remaining calories today: " + String.valueOf(caloricNeeds - consumedCalories));
+		
+		TextView targetCaloriesTextView = (TextView) findViewById(R.id.target_calories_textview);
+		targetCaloriesTextView.setTextSize(18);
+		targetCaloriesTextView.setText("From daily caloric needs: " + String.valueOf(caloricNeeds));
 	}
 	
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
