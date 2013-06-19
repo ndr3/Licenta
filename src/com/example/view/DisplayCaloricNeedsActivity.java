@@ -1,21 +1,25 @@
-package com.example.may3;
+package com.example.view;
+
+import com.example.view.R;
+import com.example.ctrl.CaloriesCtrlActivity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
 
 public class DisplayCaloricNeedsActivity extends Activity {
+	CaloriesCtrlActivity caloriesCtrl;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_caloric_needs);
 		
-		Intent intent = getIntent();
-		String caloricNeeds = intent.getStringExtra(SetDailyCaloricNeedActivity.EXTRA_MESSAGE);
+		caloriesCtrl = new CaloriesCtrlActivity();
+		
+		String caloricNeeds = String.valueOf(caloriesCtrl.getCaloricNeeds());
 		
 		TextView textView = (TextView) findViewById(R.id.caloric_needs_textview);
 		textView.setTextSize(17);

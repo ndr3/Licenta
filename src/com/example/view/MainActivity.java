@@ -1,4 +1,6 @@
-package com.example.may3;
+package com.example.view;
+
+import com.example.view.R;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 
 public class MainActivity extends Activity {
-	public final static String EXTRA_MESSAGE = "com.example.may3.MESSAGE"; 
+	public final static String EXTRA_MESSAGE = "com.example.view.MESSAGE"; 
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void addCalories(View view) {
-		Intent intent = new Intent(this, DisplayCaloriesActivity.class);
+		Intent intent = new Intent(this, com.example.view.DisplayCaloriesActivity.class);
 		EditText editText = (EditText) findViewById(R.id.add_message_edittext);
 		String message = editText.getText().toString();
 		intent.putExtra(EXTRA_MESSAGE, message);
@@ -32,7 +34,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void setDailyCaloricNeed(View view) {
-		Intent intent = new Intent(this, SetDailyCaloricNeedActivity.class);
+		Intent intent = new Intent(this, com.example.view.SetDailyCaloricNeedsActivity.class);
 		startActivity(intent);
 	}
 }

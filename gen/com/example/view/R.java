@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.may3;
+package com.example.view;
 
 public final class R {
     public static final class attr {
@@ -51,18 +51,16 @@ public final class R {
         public static final int total_calories_textview=0x7f080003;
     }
     public static final class layout {
-        public static final int activity_calories_db_adapter=0x7f030000;
-        public static final int activity_display_caloric_needs=0x7f030001;
-        public static final int activity_display_calories=0x7f030002;
-        public static final int activity_main=0x7f030003;
-        public static final int activity_set_daily_caloric_need=0x7f030004;
+        public static final int activity_display_caloric_needs=0x7f030000;
+        public static final int activity_display_calories=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_set_daily_caloric_needs=0x7f030003;
     }
     public static final class menu {
-        public static final int calories_db_adapter=0x7f070000;
-        public static final int display_caloric_needs=0x7f070001;
-        public static final int display_calories=0x7f070002;
-        public static final int main=0x7f070003;
-        public static final int set_daily_caloric_need=0x7f070004;
+        public static final int display_caloric_needs=0x7f070000;
+        public static final int display_calories=0x7f070001;
+        public static final int main=0x7f070002;
+        public static final int set_daily_caloric_needs=0x7f070003;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -70,6 +68,7 @@ public final class R {
         public static final int add_button=0x7f050002;
         public static final int add_message=0x7f050003;
         public static final int app_name=0x7f050000;
+        public static final int ctrl=0x7f05001b;
         public static final int daily_need=0x7f050007;
         public static final int extra_active=0x7f050016;
         public static final int female=0x7f05000e;
@@ -81,6 +80,7 @@ public final class R {
         public static final int insert_weight=0x7f05000a;
         public static final int lightly_active=0x7f050013;
         public static final int male=0x7f05000f;
+        public static final int model=0x7f05001c;
         public static final int moderately_active=0x7f050014;
         public static final int save=0x7f05000d;
         public static final int sedentary=0x7f050012;
@@ -88,7 +88,11 @@ public final class R {
         public static final int title_activity_calories_db_adapter=0x7f050006;
         public static final int title_activity_display_caloric_needs=0x7f050017;
         public static final int title_activity_display_calories=0x7f050004;
+        public static final int title_activity_my=0x7f05001a;
+        public static final int title_activity_samain=0x7f05001e;
         public static final int title_activity_set_daily_caloric_need=0x7f050008;
+        public static final int title_activity_set_daily_caloric_needs=0x7f050019;
+        public static final int title_activity_wmain=0x7f05001d;
         public static final int very_active=0x7f050015;
     }
     public static final class style {

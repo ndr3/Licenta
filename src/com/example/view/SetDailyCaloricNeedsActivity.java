@@ -1,4 +1,8 @@
-package com.example.may3;
+package com.example.view;
+
+import com.example.utils.CaloriesDbAdapter;
+import com.example.view.R;
+import com.example.ctrl.CaloriesCtrlActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,24 +12,28 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
-public class SetDailyCaloricNeedActivity extends Activity {
-	public final static String EXTRA_MESSAGE = "com.example.may3.CALORIC_NEEDS";
+public class SetDailyCaloricNeedsActivity extends Activity {
+	public final static String EXTRA_MESSAGE = "com.example.view.CALORIC_NEEDS";
 	
-	private CaloriesDbAdapter dbHelper;
+	private CaloriesCtrlActivity caloriesCtrl;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_set_daily_caloric_need);
+		setContentView(R.layout.activity_set_daily_caloric_needs);
 		
-		dbHelper = new CaloriesDbAdapter(this);
-		dbHelper.open();
+		if (getApplicationContext() == null) {
+			System.out.println("SetDailyCaloricNeedsActivity context == null");
+		}
+		CaloriesDbAdapter.getInstance(this);
+		
+		caloriesCtrl = new CaloriesCtrlActivity();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.set_daily_caloric_need, menu);
+		getMenuInflater().inflate(R.menu.set_daily_caloric_needs, menu);
 		return true;
 	}
 	
@@ -53,8 +61,6 @@ public class SetDailyCaloricNeedActivity extends Activity {
 			bmr = (int) (66 + 6.3*weight + 12.9*height - 6.8*age);
 		}
 		
-		
-		
 		RadioGroup radioActivityGroup = (RadioGroup) findViewById(R.id.activity_group);
 		selectedID = radioActivityGroup.getCheckedRadioButtonId();
 		
@@ -78,7 +84,7 @@ public class SetDailyCaloricNeedActivity extends Activity {
 			default: caloricNeeds = 0;				
 		}
 		
-		dbHelper.setCaloricNeeds(caloricNeeds);
+		caloriesCtrl.setCaloricNeeds(caloricNeeds);
 		
 		Intent intent = new Intent(this, DisplayCaloricNeedsActivity.class);
 		intent.putExtra(EXTRA_MESSAGE, String.valueOf(caloricNeeds));

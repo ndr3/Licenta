@@ -1,4 +1,4 @@
-package com.example.may3;
+package com.example.utils;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -14,10 +14,12 @@ import android.util.Log;
 
 @SuppressLint("SimpleDateFormat")
 public class CaloriesDbAdapter extends Activity {
-	public static final String KEY_ROWID = "_id";
-	public static final String KEY_CALORIES = "calories_no";
-	public static final String KEY_CALORIC_NEED = "caloric_need";
-	public static final String KEY_EATEN_DATE = "eaten_date";
+	private static CaloriesDbAdapter instance = null;
+	
+	private static final String KEY_ROWID = "_id";
+	private static final String KEY_CALORIES = "calories_no";
+	private static final String KEY_CALORIC_NEED = "caloric_need";
+	private static final String KEY_EATEN_DATE = "eaten_date";
 	
 	private static final String TAG = "CaloriesDbAdapter";
 	private DatabaseHelper dbHelper;
@@ -26,7 +28,7 @@ public class CaloriesDbAdapter extends Activity {
 	private static final String CREATE_CALORIES_TABLE = "CREATE TABLE IF NOT EXISTS calories (_id integer primary key autoincrement, calories_no integer not null, eaten_date long )";
 	private static final String CREATE_USERS_TABLE = "CREATE TABLE IF NOT EXISTS users (_id integer primary key autoincrement,  caloric_need integer)";
 	
-	private static final String DATABASE_NAME = "data4";
+	private static final String DATABASE_NAME = "CaloriesDB";
 	private static final String DATABASE_CALORIES_TABLE = "calories";
 	private static final String DATABASE_USERS_TABLE = "users";
 	private static final int DATABASE_VERSION = 2;
@@ -36,10 +38,10 @@ public class CaloriesDbAdapter extends Activity {
 	private static class DatabaseHelper extends SQLiteOpenHelper {
 		private static DatabaseHelper mInstance = null;
 		
-		public static DatabaseHelper getInstace(Context ctx) {
+		public static DatabaseHelper getInstance(Context ctx) {
 			if (mInstance == null) {
 				mInstance = new DatabaseHelper(ctx.getApplicationContext());
-			}			
+			}		
 			return mInstance;
 		}
 		
@@ -70,14 +72,36 @@ public class CaloriesDbAdapter extends Activity {
         }
 	}
 	
+	public static CaloriesDbAdapter getInstance(Context ctx) {
+		if ((instance == null) && (ctx != null)) {
+			instance = new CaloriesDbAdapter(ctx);
+			instance.open();
+		}
+		
+		return instance;
+	}
+	
 	public CaloriesDbAdapter(Context ctx) {
 		this.ctx = ctx;
 	}
 	
+	
 	public CaloriesDbAdapter open() throws SQLException {
-		dbHelper = DatabaseHelper.getInstace(ctx);		
-		db = dbHelper.getWritableDatabase();
-		return this;
+		try {
+			dbHelper = DatabaseHelper.getInstance(ctx);					
+			db = dbHelper.getWritableDatabase();
+			
+			if (db == null) {
+				System.out.println("db == null");
+			}
+			return this;
+		} catch (NullPointerException e) {
+			System.out.println("CaloriesDbAdapter/Open null pointer exception");
+			return null;
+		} catch (Exception ex) {
+			System.out.println("CaloriesDbAdapter/Open exception");
+			return null;
+		} 
 	}
 	
 	public void close() {
@@ -116,10 +140,10 @@ public class CaloriesDbAdapter extends Activity {
 		return db.query(DATABASE_CALORIES_TABLE, new String[] {KEY_ROWID, KEY_CALORIES}, null, null, null, null, null);
 	}
 	
-	public long setCaloricNeeds(int caloricNeed) {
+	public long setCaloricNeeds(int caloricNeeds) {
 		String strFilter = "_id=1";
 		ContentValues values = new ContentValues();
-		values.put(KEY_CALORIC_NEED, caloricNeed);
+		values.put(KEY_CALORIC_NEED, caloricNeeds);
 		
 		Cursor c = db.rawQuery("SELECT COUNT(*) FROM users", null);
 		if (c != null) {
@@ -135,7 +159,7 @@ public class CaloriesDbAdapter extends Activity {
 		return 0;
 	}
 
-	public Cursor caloricNeed() {
+	public Cursor fetchCaloricNeeds() {
 		return db.query(DATABASE_USERS_TABLE, new String[] {KEY_CALORIC_NEED}, null, null, null, null, null);
 	}
 
@@ -144,3 +168,4 @@ public class CaloriesDbAdapter extends Activity {
 	}
 
 }
+

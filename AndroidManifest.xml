@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.may3"
+    package="com.example.view"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.may3.MainActivity"
+            android:name="com.example.view.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,20 +23,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.may3.DisplayCaloriesActivity"
+            android:name="com.example.ctrl.CaloriesCtrlActivity"
+            android:label="@string/ctrl" >
+        </activity>
+        <activity
+            android:name="com.example.model.CaloriesInfo"
+            android:label="@string/model" >
+        </activity>
+        <activity
+            android:name="com.example.view.SetDailyCaloricNeedsActivity"
+            android:label="@string/title_activity_set_daily_caloric_needs" >
+        </activity>
+        <activity
+            android:name="com.example.view.DisplayCaloricNeedsActivity"
+            android:label="@string/title_activity_display_caloric_needs" >
+        </activity>
+        <activity
+            android:name="com.example.view.DisplayCaloriesActivity"
             android:label="@string/title_activity_display_calories" >
         </activity>
         <activity
-            android:name="com.example.may3.CaloriesDbAdapter"
-            android:label="@string/title_activity_calories_db_adapter" >
+            android:name="com.example.view.WMainActivity"
+            android:label="@string/title_activity_wmain" >
         </activity>
         <activity
-            android:name="com.example.may3.SetDailyCaloricNeedActivity"
-            android:label="@string/title_activity_set_daily_caloric_need" >
-        </activity>
-        <activity
-            android:name="com.example.may3.DisplayCaloricNeedsActivity"
-            android:label="@string/title_activity_display_caloric_needs" >
+            android:name="com.example.util.SAMainActivity"
+            android:label="@string/title_activity_samain" >
         </activity>
     </application>
 
